@@ -9,3 +9,10 @@ TODO:
 - Note about assessing interferences
 - Note about WDS output files
 - Update CSS so the pages aren't as austere.  Maybe add an image somewhere?
+
+- Update SOPs, store locally, and back up to cloud
+- The mapping SOP is particularly bad
+- Make sure SOPs correspond to Assignments
+- More lab-based homework (e.g. "lab-ify" the homework for the Castaing approximation)
+- More lectures about working with elemental compositions
+- Lecture about interferences
