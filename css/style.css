@@ -1,0 +1,30 @@
+/* Credit to 
+VT maroon (Chicago Maroon): #6A2C3E
+VT orange (Burnt orange): #CF4520
+*/
+
+body{
+
+    font-family: arial, helvetica, sans-serif;
+    font-size: 12pt;
+    font-weight: normal;
+    background-color: #FFD2B0;
+	padding:20px;
+}
+
+ul{
+    list-style-type: circle;
+}
+
+a{
+    text-decoration: none;
+    color:#000aa4;
+}
+
+a:hover{
+    color: #59c3ff;
+}
+
+h1{
+	color:#6A2C3E;
+}
