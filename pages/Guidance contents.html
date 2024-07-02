@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Guidance contents</title>
+        <link rel="stylesheet" type = "text/css" href="../css/style.css">
+		<script type="text/javascript">
+        function checkPassword() {
+            var password = prompt("Please enter the password:");
+            if (password === "Toilet Gnome") {
+				/*
+					Yes, I know I haven't created a very threshold for access control here.
+					If you've put in the effort to inspect this HTML document to circumvent
+					my password, then you're not among those who the password is intended
+					to deter.  Just please remember that it's a bad idea to collect data
+					without a good reason.
+				*/				
+                document.getElementById("protected-content").style.display = "block";
+            } else {
+                alert("Incorrect password.");
+                window.location.href = "https://vtepma.github.io/";
+            }
+        }
+		</script>
+		<style>
+        #protected-content {
+            display: none;
+        }
+		</style>
+    </head>
+    
+	<!--
+		<li><a href = "">
+		SOP name</a></li>
+	-->
+	
+	<body onload="checkPassword()">
+    <div id="protected-content">
+	
+	<h1>EPMA Guidance</h1>
+    
+	<p><b>Note:</b> </p>
+	
+	<a href = "../index.html">back to EPMA class page</a>
+	
+	<h3>NCFL microprobe lab</h3>
+	
+	<ul>
+		<li>FAQs</li>
+		<li>Identifying minerals with EDS</li>
+		<li>WDS map planning</li>
+		<li>Quant detection limits</li>
+		<li>Interference assessment and correction</li>
+		<li>Quant map notes</li>
+		<li>Image segmentation notes</li>
+	</ul>
+	
+	</div>
+    </body>
+</html>
