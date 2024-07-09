@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>TEMPLATE</title>
+        <title>WDS map planning</title>
         <link rel="stylesheet" type = "text/css" href="../css/style.css">
     </head>
     
@@ -12,19 +12,90 @@
 	
 	<body>
     
-	<h1>TEMPLATE</h1>
+	<h1>Guidance for WDS element maps</h1>
     
-	<p><b>Note:</b> The SOPs are intended to assist the lab manager and other more experienced users with training exercises, and are not
-	intended to be used as a substitute for training.  That is, if you forget how to do something, then refer to the SOP.  If you want to
-	do something new, DO NOT refer to the SOP -- instead, reach out to the lab manager (Lowell) for training.</p>
+	<p>Optimizing a recipe for mapping trace elements on the microprobe is challenging due to uncertainty regarding how much time the user should
+	budget.  The last thing the user wants is to blast his or her sample at high beam current for many hours to days and not have a nice-looking map
+	at the end.  These guidelines are intended to give the user some idea about how to avoid this problem using a strategy that can be performed “on
+	the fly” without any cumbersome additional data collection.</p>
 	
-	<a href = "../index.html">back to EPMA class page</a>
+	<p>The map duration is easy to calculate: it’s just the number of pixels multiplied by the dwell time.  For example, a 256 x 192 pixel map (49,152
+	pixels) collected using a 10 ms dwell time (per pixel) takes 491.52 seconds (about 8 minutes).  Actual maps can take longer when mapping in “stage
+	mode” due to the time that the stage takes to move from one row to the next.  Choosing the pixel resolution is usually relatively straightforward:
+	it usually ends up being a compromise between the user’s desire for the map to look pretty but also not take too long.  The dwell time in contrast
+	should be chosen specifically to obtain the desired amount of X-ray counts.</p>
 	
-	<h3>NCFL microprobe lab</h3>
+	<p>What factors control the X-ray count rate?  The count rate depends on these factors: sample composition, beam current, detector efficiency, and
+	spectrometer alignment.  It can be assumed that the sample composition, detector efficiency, and spectrometer alignment are basically outside the
+	users’s control or are straightforward to optimize, so they can be ignored for now.  That leaves the beam current.  Basically, the user can set the
+	beam current as high as needed as long as the sample isn’t damaged and the crystals aren’t being subjected to count rates exceeding 100,000s of CPS,
+	which causes the diffraction crystals to degrade (usually anything below 200 nA is safe, when analyzing geological materials).</p>
+	
+	<h3>Procedure for optimizing the map conditions</h3>
 	
 	<ul>
-		
+		<li>Are the elements detectable? (EDS and WDS spectra) -- Peak Net CPS >10σ above background CPS</li>
+		<li>Is the heterogeneity detectable? (“X-ray measure” tool) -- "Location 2" CPS >3σ above "Location 1" CPS?<li>
+		<li>Is the heterogeneity real or artificial? (additional WDS spectra) -- "Location 2" net CPS >3σ above "Location 1" net CPS</li>
 	</ul>
-		
+	
+	<p><u><b>Note:</b></u> some steps in this optimization procedure involve performing analyses on the material that will eventually be mapped.  For
+	this reason, it may be a good idea to perform these steps on another mineral that is presumably the same material (e.g. do the analyses on a
+	“sacrificial” garnet).</p>
+	
+	<h4>Part 1: Can we detect the elements of interest?</h4>
+	
+	<ol>
+		<li>Do a few test analyses using the EDS system, and use this information to identify which elements will be the easiest/most problematic:
+		major elements (>10 wt%) can be ignored on the basis that they will be easy* to map.</li>
+		<li>Start with these default settings: 512 x 512 pixels, 10 ms dwell time, 100 nA</li>
+		<li>Will the map take too long?  If so, decrease the resolution.</li>
+		<li>Is the resolution too low for the map to be useful?  If so, then you’re screwed.  Sorry!</li>
+		<li>Arrange the elements on the WDS spectrometers using the “PC-EPMA” window, and note the nominal peak position of each element.</li>
+		<li>Use the “Qual” function and the dwell time and beam current chosen in step 2 to collect WDS spectra covering the spectral range from L = 5
+		mm below to L = 5 mm above each element’s nominal peak position.</li>
+		<li>Note the peak position, peak count rate, background count rate, and whether you can see a peak at all.  If you don’t see a peak at all, go
+		back to step 2 and increase the dwell time/beam current.</li>
+		<li>Calculate the standard deviations of the peak and background count rate (square root of the number of counts), and compare these to your
+		personal criteria** for detection and quantification limits (how many BG standard deviations is the net count rate?  Greater than 3x?  10x?).  If
+		the results are unacceptable, go back to step 2)</li>
+	</ol>
+	
+	<p><b><u>*Note:</u></b> If the user is interested in mapping small compositional variations in major elements, it may be worth considering whether to
+	include these in the optimization process.  However, this usually isn’t the case.</p>
+	
+	<p><b><u>**Note:</u></b> If the net peak count rate is 10 standard deviations above background, this would be considered by most people to reach the
+	“Limit of Quantification.”  This is the criterion that I recommend using.</p>
+	
+	<h4>Part 2: Will we be able to see any zonation in the elements of interest?</h4>
+	
+	<ol>
+		<li>Use the “X-ray measure” tool to analyze a few points* on the map area (if applicable, set the beam diameter beforehand to match the size used
+		in the map).</li>
+		<li>Calculate the count rate** for each point by dividing the number of counts by the measurement time.</li>
+		<li>Calculate the standard deviation at each point (square root of the number of counts), and compare these to your personal criteria for 
+		detection and quantification limits (how much higher is the count rate from one point to another?  Greater than 3x?  10x?).  If the results are
+		unacceptable, go back to step 2).</li>
+	</ol>
+	
+	<p>*Alternatively, a line analysis could also be done if time permits.</p>
+	
+	<p>**Note:  This approach assumes that the count rates aren’t time-dependent.  This can be assessed using the “Rate Meter” tool.</p>
+	
+	<h4>Part 3: Is the heterogeneity real or artificial?</h4>
+	
+	<p>At this point, you might have either a) used the “X-ray measure” tool to identify two locations that yield different X-ray count rates or b)
+	collected your map and seen two areas with different count rates.  In either case, it’s still necessary to consider whether the differences in count
+	rate are actually due to differences in the composition of the material as opposed to differences in the background count rate.  Here is how to make 
+	this determination:</p>
+	
+	<ol>
+		<li>Collect WDS spectra from two locations on the sample for comparison.  Let’s call the regions with the lower and higher count rates “Location
+		1” and “Location 2” respectively.</li>
+		<li>Calculate the net count rate (peak minus background counts) for the two points.</li>
+		<li>If the net count rate of Location 2 is greater than Location 1 by 3σ calculated for Location 1, then it’s safe to conclude that the
+		heterogeneity is real.</li>
+	</ol>
+	
     </body>
 </html>
