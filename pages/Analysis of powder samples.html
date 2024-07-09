@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TEMPLATE</title>
+        <link rel="stylesheet" type = "text/css" href="../css/style.css">
+    </head>
+    
+	<!--
+		<li><a href = "">
+		SOP name</a></li>
+	-->
+	
+	<body>
+    
+	<h1>Bulk analysis of rocks and powders</h1>
+    
+	<p><u>Note:</u> The electron microprobe is best known as a tool for acquiring standards-based quantitative analyses from micron-sized analytical volumes
+	in solid materials that are homogenous at the scale of 1s of microns but heterogeneous on length scales of 10s of microns to centimeters.  As such, this
+	instrument is best suited for analysis of well-polished rock and alloy samples.  What it's not well suited for are bulk analyses of rocks and powders.</p>
+	
+	<p>If you're interested in determining the bulk composition of a rock or a powder, here are some great methods for that:</p>
+	<ul>
+		<li><u>X-ray fluorescence spectroscopy (XRF)</u> -- the GEOS department has one in Derring Hall.  Rock samples must be ground into a powder, and powder
+		samples can be pressed into a pellet or melted into a glass bead.</li>
+		<li><u>Powder X-ray diffraction (XRD)</u> -- the GEOS department also has one in Derring Hall.  Rock samples must be ground into a powder.  The mineral
+		proportions calculated from the XRD spectra can them be converted into a bulk composition using a mass balance approach.</li>
+		<li><u>Flux melting + WDS or EDS</u> -- the GEOS department has a furnace that can melt powders into glass beads that can be analyzed using
+		the microprobe, a SEM, or LA-ICP-MS</li>
+	</ul>
+
+	<p>If you refuse to use any of these methods, insist on using the microprobe, and are prepared for the experience to be a struggle, then...</p>
+
+	<h3>First order questions:</h3>
+	<ol>
+		<li>Do we care about major elements or trace elements?</li>
+		<li>Are we analyzing a polished rock or a powder?</li>
+	</ol>
+
+	<h4>Case 1: Analyzing a polished rock to determine the major element concentrations</h4>
+	
+	<p>To do this, it's best to map the sample (count maps are ok) and use an image segmentation method to determine the area percentage of each mineral
+	in the rock.  Then, analyze a representave sample of each mineral and calculate the bulk composition of the rock as an area-weighted average of each
+	mineral composition.  Alternatively, you could use point counting or powder XRD instead of mapping to determine the proportion of each phase.</p>
+
+	<h4>Case 2: Analyzing a polished rock to determine a trace element concentration</h4>
+	
+	<p><i>Unfortunately there's no good way to do this.</i>  That's because the trace elements are usually present in accessory phases, which represent a very
+	small area percentage of the rock.  As such, you're not going to be able to detect them very well by mapping, and you'll have problems with
+	quantification related to point analyses and map pixels overlapping with grain poundaries.  Matrix corrections are not applicable to analyses in
+	which the analytical volume contains a mixture of phases.</p>
+
+	<h4>Case 3: Analyzing powders when the grain size is large relative to the beam size, regardless of whether you're interested in major or trace
+	elements.</h4>
+	
+	<p>If the particles in the powder are smooth and flat and the beam can be positioned entirely within the grains, then you can treat the sample the
+	same as in Case 1 (analyzing a rock for major elements).</p>
+
+	<h4>Case 4: Analyzing powders when the grain size is small relative to the beam size, regardless of whether you're interested in major or trace
+	elements.</h4>
+	
+	<p>When the interaction volume of the beam is larger than the size of the particles, then "traditional" standards-based EPMA quantification is no
+	longer useful because matrix corrections can't be done.  In this case, you need to use empirical calibration curves using powder mixtures for which
+	you know the composition.  Try to create powders that have particles that are only 1s of microns in diameter and use a beam that is ~10 microns in
+	diameter or larger.  Analyze the samples using the same conditions as your standards, and perform enough analyses to get the reproducibility
+	statistics that you need.</p>
+
+	<h3>Some comments about sample preparation:</h3>
+	
+	<ul>
+		<li>Care must be taken to minimize the epoxy/sample ratio, but pressing the powders is probably "overkill," so to speak.</li>
+		<li>One alternative to pressing is, if the particles are relatively dense, you can use an epoxy with a long working time and low viscosity so
+		that the particles can settle.</li>
+		<li>Another alternative is to put some powder in a small container, add some epoxy on top and mix, and then gradually add powder until you can't 
+		mix anymore into the epoxy.  Then, put this paste into a 1/4-inch mold (e.g. a plastic drinking straw).  Multiple samples of powder prepared in 
+		this way can be combined into a single 1-inch diameter mount.
+		<li>Hand-mixing powders in a mortar and pestle until they feel smooth to the touch and no longer gritty is a good powdering method.
+		<li>Powder samples don't need to be polished particularly well.  You can just use a large grit size like 600 or 800 grit.
+		<li>To ensure that rock samples are representative, it's a good idea to grind up a large volume of rock and separate aliquots of powder with a splitter.  (I don't know much about this process)
+	</ul>
+	
+	</body>
+</html>
