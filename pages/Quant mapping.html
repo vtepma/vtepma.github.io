@@ -1,0 +1,65 @@
+ <!DOCTYPE html>
+<html>
+    <head>
+        <title>Quant mapping</title>
+        <link rel="stylesheet" type = "text/css" href="../css/style.css">
+    </head>
+    
+	<!--
+		<li><a href = "">
+		SOP name</a></li>
+	-->
+	
+	<body>
+    
+	<h1>Quant mapping</h1>
+    
+	<p><i>Rev. 7/16/2024 LRM</i></p>
+	
+	<p><b><u>Note:</u></b> To date, I am not aware of a case in which a quant map is necessary to answer a scientific question.  My opinion that a minimum
+	amount of time should be spent on quant mapping.</p>
+	
+	<p>Quant mapping refers to a process of collecting and post-processing X-ray maps so that they display the concentration of each element in the
+	material rather than just the count rate.  This can be done in one of several ways:</p>
+	
+	<h4>Empirical quant map</h4>
+	
+	<p>A few points in the map are analyzed using WDS or WDS, and then a multi-point calibration curve is used to convert the pixel values from raw
+	counts to concentration.</p>
+	
+	<p><i><u>Pros:</u></i> Quick and easy to do.  Easy to explain what you did.</p>
+	<p><i><u>Cons:</u></i> Pixel compositions can be wildly inaccurate if the mapped area contains multiple phases with different densities (not the case
+	in this sample).</p>
+	
+	<h4>Background-corrected empirical quant map (a.k.a. “Castaing map”)</h4>
+	
+	<p>The background count value is estimated using a simultaneously-collected BSE map, count maps are converted into net count maps by subtracting
+	the background value at each pixel, and then a calibration curve is used as in the Empirical quant map.</p>
+	
+	<p><i><u>Pros:</u></i> Basically just as fast as empirical quant maps, but more accurate.  Better for samples with multiple phases with different densities.</p>
+	<p><i><u>Cons:</u></i> Still can be inaccurate – especially when multiple phases are present with different densities.  Figuring out how to estimate the
+	background using BSE images is a little tricky.</p>
+	
+	<h4>JEOL quant map:</h4>
+	
+	<p>Peak and background maps are collected for each pixel, a standard reference material is used to calibrate the net count rate obtained for each
+	pixel into a concentration, and then matrix effect (e.g. ZAF) corrections are performed at each pixel.</p>
+	<p><i><u>Pros:</u></i> Pixels are as accurate as quantitative point analyses.  They’re not as precise individually but the average compositions of many
+	pixels can be more precise than individual point analyses, depending on the count times used.  “Totals” map provides excellent quality control.</p>
+	<p><i><u>Cons:</u></i> Takes forever to collect using our software (often 6 times longer depending on the number of elements being analyzed). All elements
+	must be present to provide a complete composition.</p>
+	
+	<h4>MAN-based quant map:</h4>
+	
+	<p>In principle, the user doesn't actually need to collect background maps because the background count rate can be predicted based on the
+	composition -- specifically the mean atomic number (MAN) of the sample.  In this approach, as described by <a href = "https://doi.org/10.2138/am-2021-7739">
+	Donovan et al. (2021)</a>, the user collects peak maps and then iteratively uses these to determine the composition of the sample using an empirical
+	relationship to estimate the background at each spectrometer position based on the calculated mean atomic number of the sample.  The setup for this
+	method involves analyzing several pure metal standards (i.e. with known atomic numbers) to determine the background count rate at the spectrometer
+	positions where elements of interest will eventually be analyzed.</p>
+	
+	<p><i><u>Pros:</u></i> Fast, accurate, and more precise than JEOL quant maps because additional analytical uncertainty is not incurred by background maps.</p>
+	<p><i><u>Cons:</u></i> We don't have the necessary software to do this, and somebody will need to figure out the method!</p>
+		
+    </body>
+</html>

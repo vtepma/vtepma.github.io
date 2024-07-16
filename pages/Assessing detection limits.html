@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Quant detection limits</title>
+        <link rel="stylesheet" type = "text/css" href="../css/style.css">
+    </head>
+    
+	<!--
+		<li><a href = "">
+		SOP name</a></li>
+	-->
+	
+	<body>
+    
+	<h1>Estimating quantitative detection limits</h1>
+    
+	<p><b><u>Note:</u></b> more information about this subject can be found in section 8.5 in "the Reed book" starting on page 142, and also in my lecture
+	about uncertainty.</p>
+	
+	<p>The easiest and most straightforward option for assessing detection limits is to just perform a standardless quantitative analysis on the sample
+	of interest.  With this approach, you can experiment with different beam currents and count times without needing to perform a full calibration.  This
+	could also be done using the "X-ray measure" tool, but that approach introduces more opportunities for user error although it is sometimes more beneficial
+	as a pedagogical approach.</p>
+	
+	<p>Here's the process for assessing uncertainties and detection limits using the standardless analysis method:</p>
+	
+	<ol>
+		<li>Analyse the material of interest using the EDS detector to identify which elements are present, and at what concentrations.</li>
+		<li>Set up a quantitative analysis recipe for the material including the major elements identified using EDS and the trace elements of interest,
+		and leave the calibration stantard as "Cal-Std".</li>
+		<li>Analyze the material of interest using the standardless WDS recipe.</li>
+		<li>Open the quantitative analysis result returned as a ".wt" file, and note the following values:
+			<ul>
+				<li>"Net(cps)": This is the current-normalized net count rate above background.</li>
+				<li>"Bg-" and "Bg+": These are the current-normalized background count rates.</li>
+				<li>"S.D.(%)": This is the relative standard deviation of the analysis determined based on counting statistics.</li>
+				<li>"D.L.(ppm)": This is the detection limit calculated from counting statistics defined as three standard deviations above background.</li>
+			</ul>
+	</ol>
+	
+	<p>Now consider this: it is commonly accepted that an analyte is "detectable" if its signal is 3 standard deviations above a background signal
+	(usually determined by analyzing a blank that is presumed to contain none of the analyte).  Similarly the concentration of the analyte is
+	considered to be "quantifiable" if its signal is 10 standard deviations above background.  This is based on the statistical definitions of "false
+	positive" and "false negative" errors.  While I don't generally advocate the use of statistics, I do think these concepts are useful for quantitative
+	analyses (and mapping) because they do tend to conform to most users expectations regarding data quality.</p>
+	
+	<p>Calculating the number of standard deviation above background is fairly straightforward: just take the square root of the mean of both background
+	count rates -- that gives you the standard deviation of the background count rate -- and then divide the net count rate by this number.  If the result
+	is greater than 3, then the element is detectable.  If it's greater than 10, then the element is quantifiable.</p>
+	
+	<p>If you're not happy with the peak-to-background ratio that you're getting, then these are your options:</p>
+	
+	<ul>
+		<li>Increase the beam current</li>
+		<li>Increase the count time (note that for trace elements both background count times should approach the peak count time)</li>
+		<li>Increase the accelerating voltage (is the overvoltage ratio sufficiently high for the X-ray you're trying to excite?)</li>
+	</ul>
+	
+    </body>
+</html>

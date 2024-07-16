@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Interferences</title>
+        <link rel="stylesheet" type = "text/css" href="../css/style.css">
+    </head>
+    
+	<!--
+		<li><a href = "">
+		SOP name</a></li>
+	-->
+	
+	<body>
+    
+	<h1>Elemental interferences</h1>
+	
+	<p>WDS detectors have much better energy resolution than EDS detectors, but elemental interferences still occur.  For example, here are some examples
+	of "classic" interferences:</p>
+	
+	<ol>
+		<li>Ti K-lines vs Ba L-lines</li>
+		<li>V Ka vs Ti Kb</li>
+		<li>Rb L-lines vs Si K-alpha</li>
+		<li>S Ka vs Mo L-?</li>
+		<li>Second-order Fe line vs F?</li>
+		<li>Transition metal K-alpha vs K-beta lines on PET?</li>
+	</ol>
+	
+	<h3>Identifying interferences</h3>
+	
+	<p>The most straightforward way to identify elemental interferences is by comparing WDS spectra that contain peaks of the element of interest and
+	interfering element.  Do the peaks overlap with each other or get in the way of suitable background spot locations?  If so, then you have identified
+	an elemental interference... but is the interference going to be significant for your analysis?</p>
+	
+	<h3>Assessing the significance of elemental interferences</h3>
+	
+	<p>When you use JEOL's WDS spectral analysis program, you will see that there are X-rays everywhere!  For example, you may see that the Pb M-beta
+	line you want to analyze overlaps with a Y L-gamma line, a La line, and a higher order (?) S line.  But L-lines and higher-order lines are generally
+	pretty weak.  Are they likely to contribute enough counts to affect the measured net count rates you care about?  A good way to figure this out is
+	to use the equation described in <a href = "https://iopscience.iop.org/article/10.1088/1757-899X/891/1/012001">Allaz et al., 2020</a>:</p>
+	
+	<p>%_interference = (I_A_interf/I_A_std)*(C_A_std/C_B_interf)*(C_B_unk/C_A_unk)</p>
+	
+	<p>...for element of interest "A" and interfering element "B" where...</p>
+	
+	<ul>
+		<li>I_A_interf = intensity at the peak position of element A in the interference standard,</li>
+		<li>I_A_std = intensity at the peak position of element A in the calibration standard,</li>
+		<li>C_A_std = concentration of element A in the calibration standard,</li>
+		<li>C_B_interf = concentration of element B in the interference standard,</li>
+		<li>C_A_std = concentration of element A in the unknown sample, and</li>
+		<li>C_B_interf = concentration of element B in the unknown sample.</li>
+	</ul>
+	
+	<p>To apply this equation, perform Qual analyses on both the calibration standard ("std") for element "A" and an interference standard ("interf")
+	that contains a significan amount of interfering element "B" but none of element "A".  The value "I_A_interf" is determined by using the intensity
+	measured from the "shoulder" of the peak for element "B" at the same L-value used to measure "I_A_std".  Allaz et al. propose that "%interference"
+	of about 2% corresponds to a "minor" interference, and less than 0.5% corresponds to an "insignificant" interference.</p>
+
+	<p>By inspecting this equation, it becomes apparent that elemental interferences are less significant when analyzing major elements and more significant
+	for trace element analyses.  When "A" is a major element, "C_B_unk" is likely to be very small relative to "C_A_unk" for most elements, so the ratio
+	"%_interference" will be close to zero.  While major elements by definition only vary within 1 order of magnitude (10 wt% to 100 wt%), the concentrations
+	of trace elements detectable by the microprobe can vary from 10 ppm to 10,000 ppm (1 wt%), so the ratio "C_B_unk/C_A_unk" can potentially vary over
+	seven orders of magnitude (from [1E+4 ppm / 1E+1 ppm] = 1E+3 to [1E+1 ppm / 1E+4 ppm] = 1E-3).
+	
+	<h3>Countermeasures for interferences</h3>
+	
+	<p>What is one to do if "%interf" is a few percent or larger?  Here are a few general options:</p>
+	
+	<ul>
+		<li><b><u>Use different hardware:</u></b> Using WDS instead of EDS already provides a dramatic improvement in energy resolution, but interferences
+		can still -- especially for trace elements as discussed above.  Another example of an alternative hardware configuration is performing analyses
+		at a longer focal length where peaks are better resolved.  For example, the Ti vs Ba interference can be mitigated by using a LiF crystal instead
+		of a PET crystal because the overlapping peaks occur at around 192 mm on the LiF crystal vs about 89 mm on the PET crystal.  Another "hardware
+		option" is to reduce the slit width on the spectrometer -- this should (?) reduce the count rate but also make the peaks more narrow and increase
+		the signal/noise ratio.  Finally, if you have the funding, you could upgrade to a spectrometer with a larger Rowland circle -- that should also
+		work, right?</li>
+		<li><b><u>Use different peaks:</u></b> This is probably obvious enough to go without saying, but one can potentially avoid an elemental interference
+		by switching to a different X-ray.  If the Ka line for element A doesn't work, then try the Kb line or the second order Ka line.</li>
+		<li><b><u>Use different detector settings:</u></b> If the interfering peak from element B is a higher order line, then it can be filtered out by
+		adjusting the window on the detector to exclude lower voltage pulses which correspond to lower energy X-rays.</li>
+		<li><b><u>Spectral deconvolution:</u></b> This is what is done on the EDS, but it's not likely to be a practical option in most cases for the WDS
+		because of the amount of time required to collect WDS spectra.  It's a legit option though, so I include it for completeness.  This can be done
+		either by fitting a gaussian curve (the X-axis should be energy -- not L-value!) or by using a spectrum without the interference as a "peak shape"
+		reference with MLLSQ fitting as in DTSA-II.</li>
+		<li><b><u>Correction factors:</u></b> Basically use the ratio "(I_A_interf/I_A_std)*(C_A_std/C_B_interf)" to correct the measured concentration of
+		element "A" from a quant analysis.  To do this the "lazy way" one would just multiply the ratio by the concentration of element "B" and subtract
+		the result from element "A" but this would not account for matrix effects.  A better approach is to apply the interference factor to the measured
+		net count rate and then apply the necessary matrix corrections.  This approach is described in more detail below.</li>
+	</ul>
+	
+	<h3>Interference correction factors in JEOL's software</h3>
+	
+	<p>JEOL's PC-EPMA program allows the user to correct the net count rate of an element "A" of interest using a correction factor multiplied by the
+	net count rate multiplied by the net count rate of interfering element "B".  Note that both elements need to be analyzed using WDS -- not EDS.
+	This is controlled using the table in the purple "analysis condition" field to specify spectrometer/crystal/element A, spectrometer/crystal/element B,
+	and a constant "ratio" value.  Here are the steps to determine the ratio:
+	
+	<ol>
+		<li>Calibrate a quantitative analysis using normal standards for both elements "A" and "B"</li>
+		<li>Perform Quant analyses on the reference materials used to calibrate elements "A" and "B" without any interference correction.</li>
+		<li>Calculate the ratio by dividing the count rate of "element A" analysed in the standard for element B (i.e. "I_A_interf") by the count rate of
+		element "A" in the standard for element "A".</li>
+		<li>Use the "OffQnt" tool to reprocess the quantitative analysis of "standard A" using the interference correction "ratio" obtained in step 3.
+		Increase the "ratio" value if the corrected count rate is greater than zero (undercorrecting), or decrease the "ratio" if the corrected count rate
+		is less than zero (overcorrecting).</li>
+		<li>Update the quantitative analysis recipe to apply the ratio.</li>
+	</ol>
+	
+    </body>
+</html>

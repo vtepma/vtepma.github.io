@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Beam damage</title>
+        <link rel="stylesheet" type = "text/css" href="../css/style.css">
+    </head>
+    
+	<!--
+		<li><a href = "">
+		SOP name</a></li>
+	-->
+	
+	<body>
+    
+	<h1>Time-dependent intensity</h1>
+    
+	<p>A fundamental assumption we make when doing quantitative analyses is that the X-ray count rate is constant because it depends only on the
+	composition of the sample.  This is generally a good assumption, but it is not always true.  A few factors can potentially cause the count
+	rate to change over time, including:</p>
+	
+	<ol>
+		<li>Beam damage</li>
+		<li>Diffusion effects</li>
+		<li>Carbon deposition</li>
+	</ol>
+	
+	<p>Strategies for identifying and correcting for these effects are discussed below.</p>
+	
+	<h3>Sample heating</h3>
+	
+	<p>One of the many electron-sample interactions that we need to consider is sample heating.  Sample heating can be modeled using the simple empirical
+	equation found on p. 19 in "the Reed book" but we usually notice it happening by accident.  In principle, one can predict if beam damage is likely to
+	occur by calculating the increase in temperature of the sample using the equation.  To do this, just look up the thermal conductivity of the material
+	as well as its maximum stable temperature, and substitute these values into the equation along with the beam conditions to be used.  If the calculated
+	change in temperature would raise the sample temperature to a point where it becomes unstable, then use of a larger diameter beam or less beam power
+	(accelerating voltage and current) is required.</p>
+	
+	<h3>Using the chart recorder</h3>
+	
+	<p>The equation used to model sample heating is not time-dependent, but the effects of sample heating are almost certainly kinetically-limited.  We
+	can monitor the condition of the sample in real time using the chart recorder tool to get an indication of how fast the sample is changing as it is
+	exposed to the beam.  Here is an example procedure to do this:</p>
+	
+	<ol>
+		<li>Navigate to a representative location that is suitable for testing.</li>
+		<li>Insert the PCD.</li>
+		<li>In the "beam settings" tab (right side of the "SEM Center" window), click "beam diameter" and change the beam diameter to the desired value.</li>
+		<li>Click the "spot" button to stop beam scanning, and put it in spot mode.</li>
+		<li>Move the spectrometers to the desired positions for the X-rays of interest.</li>
+		<li>Select the chart recorder tab in the "PC-EPMA" program and pop out the window.</li>
+		<li>Click the "play/start" button to begin recording data, and wait a few seconds for the data to start collecting.</li>
+		<li>Retract the PCD, and watch to observe what happens.</li>
+		<li>When the experiment is finished, insert the PCD again</li>
+		<li>Don't forget to change the beam diameter back to 0</li>
+		<li>Have a look at your sample using the SED and/or BED-C to see if anything changed.</li>
+	</ol>
+	
+	<p>Did the sample/adsorbed current change over time?  What about the X-ray count rate?  If the X-ray count rate changed, then it may be necessary to
+	use a larger beam diameter or decrease the beam power.</p>
+	
+	<p>You may have noticed that when the PCD is inserted, you see the nominal value that you would expect for your recipe, and when the PCD is retracted,
+	you see a smaller number.  When the PCD is inserted, it is directly reading the flow of electrons in the beam, which corresponds to the electron dose
+	that you want delivered to your sample.  When the PCD is retracted, the system instead reports the amount of current that is conducted to ground through
+	the sample, the conductive coating, and the sample holder.  When the sample is beam-stable, the adsorbed current shouldn't change significantly.  When
+	the adsorbed current changes, it indicates that the electrical properties of the sample are changing -- a potential indication of beam damage.</p>
+	
+	<h3>Correcting for TDI</h3>
+	
+	<p>In addition to using the chart recorder, another great way to assess TDI is to perform replicate analyses on the same spot -- just analyse the spot
+	in the same location over and over again.  If the rate of change in the count rate is slow, then you may not notice TDI using the chart recorder, but
+	you will certainly notice with replicate analyses.  Once you have collected a sufficient number of replicate analyses, you can correct for TDI using
+	one of these two general approaches:</p>
+	
+	<ol>
+		<li><b><u>The lazy empirical approach:</u></b> Simply fit a function to the compositions that you obtain, and extrapolate the compositional trend
+		back to the "zeroth" analysis or "t = 0".  Strictly speaking this doesn't rigorously apply the appropriate matrix effect correction to the corrected
+		sample composition, but it will basically get the job done.</li>
+		<li><b><u>The rigorous approach:</u></b> in principle, what you *should* do is extrapolate the raw X-ray count rates to "t = 0" and then use the
+		corrected count rates to calculate a new matrix-corrected composition.  I know that this can be done in "Probe for EPMA" but there is almost
+		certainly a JEOL software solution for this as well.</li>
+	</ol>
+	
+	<h3>Carbon deposition</h3>
+	
+	<p>Another phenomenon that can produce a time-dependent X-ray intensity is carbon deposition.  While we would like for there to be a perfect vacuum
+	inside the microprobe, the reality is that a small amount of gas is always present.  This includes a small amount of carbon contamination from a
+	variety of sources.  Some labs go to great lengths to minimize this carbon contamination using specialized hardware like plasma cleaners and cryogenic
+	traps, but we don't have any of these countermeasures.  Carbon contamination is deposited on the surface of the sample at the edge of the beam.  This
+	can be seen in X-ray maps as a "donut" shape or in SED images as a dark spot (?).</p>
+	
+	<p>Carbon contamination is a big problem for the analysis of carbon in steels.  A potential workaround is to use replicate analyses or empirical
+	quantitative mapping to minimize the amount of time that is spent analyzing individual areas.</p>
+	
+    </body>
+</html>

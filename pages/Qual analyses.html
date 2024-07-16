@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>WDS spectra</title>
+        <link rel="stylesheet" type = "text/css" href="../css/style.css">
+    </head>
+    
+	<!--
+		<li><a href = "">
+		SOP name</a></li>
+	-->
+	
+	<body>
+    
+	<h1>WDS spectra (a.k.a. Qualitative/"Qual" analyses)</h1>
+    
+	<p>The microprobe has two types of X-ray spectrometers: one energy distpersive spectrometers (EDS) and five wavelength-dispersive spectrometers (WDS).
+	These basically both collect spectra in the same way -- by sweeping through their allowed energy range to assign X-ray counts to a particular energy
+	level.  However the EDS detector performs this "sweeping" operation many orders faster than the WDS detector (microseconds vs 10s to 1000s of seconds).
+	For this reason, I usually tell users that the EDS detecor can collect the full energy range suimultaneously while the WDS can only "look at one energy
+	at a time" -- this is a lie.</p>
+	
+	<p>Qualitative analysis (or the acquisition of WDS spectra) is done by dosing a single location with electrons while scanning one or several of the
+	WDS detectors through a specified range.  These are the factors that must be considered to set up a Qual analysis:</p>
+	
+	<ul>
+		<li><b><u>Spectrometer range:</u></b> the start and end spectrometer position in terms of the spectrometer length (sample-detector distance in mm)</li>
+		<li><b><u>Step size:</u></b> the spectrometer length of one channel in the spectrum (the number of channels = spectrometer range / step size)</li>
+		<li><b><u>Dwell time:</u></b> the amount of time to be spent counting on each channel (the acquisition time = number of channels * dwell time)</li>
+	</ul>
+	
+	<h3>Why WDS spectra?</h3>
+	
+	<p>WDS spectra aren't particularly useful for determining "the stuff we care about" such as elemental concentrations, elemental distribution, or sample
+	morphology.  However, they're extremely useful for method development:</p>
+	
+	<ul>
+		<li>Trying to decide where to put your background points for quant analysis?  Look at representative WDS spectra of materials with the elements of
+		interest (or potentially interfering elements) to find "clean" background areas to use.</li>
+		<li>Trying to decide what beam conditions are needed to detect an element of interest in a quantitative analysis or a map?  Collect a WDS spectrum
+		of your sample and use the peak and background intensities to figure out what your detection limits are.</li>
+		<li>Trying to determine the optimum spectrometer length to use for an "on-peak" analysis?  Collect a WDS spectrom of a narrow region about the peak
+		to locate the maximum.  You probably do this all the time -- it's called a "peak search".</li>
+	</ul>
+	
+	<p><b><u>Fun fact:</u></b> WDS spectra run in the opposite direction of EDS spectra (L-value increases with decreasing energy).  However, if you change
+	the X-axis to keV in the software, it will reverse the axis for you.</p>
+	
+	<p><b><u>Fun fact:</u></b> While JEOL microprobes report the spectrometer length as the L-value in mm, Cameca probes report the spectrometer position
+	in terms of "sin theta units" which are just 100,0000x the value of sin(theta) as in Bragg's law.  The JEOL units make more sense if you want to think
+	about your analysis in terms of what is physically going on with regard to the spectrometer geometry relative to your sample.  The Cameca units make
+	more sense if you want to think about your analysis in terms of what is going on in relation to the diffraction crystal.</p>
+	
+	<h3>WDS spectra and trace elements</h3>
+	
+	<p>What happens if we want to see a trace element peak in a WDS spectrum?  Trace elements can be detected on the microprobe by using long count times
+	spent counting on a very narrow energy range, but this means that collecting a representative WDS spectrom takes a very long time.  Consider the following
+	example.  To analyze Pb in monazite, we need to count on peak and background points for 200 s each -- this corresponds to a 600 s acquisition time
+	(10 minutes).  However, if we want to collect a WDS spectrum that shows the Pb peak (0.01 s of wt%) we would need to use the same count time from the
+	quant recipe as our dwell time.  If we collect our spectrum so that it includes both background points with a +5/-5 mm offset, we would need to scan
+	over 10 mm.  With a 100 micron step length, this would be 10 mm / (0.1 mm/channel) = 100 channels.  With a dwell time of 200 s, the total acquisition
+	time for the WDS spectrum would be 20,000 s, or 5.56 hours.</p>
+	
+	<p>This is not just a problem because the user will get bored -- leaving a static beam on the sample for this long would certainly damage the sample.
+	The long duration can't be avoided, but the beam damage issue can simple be resolved by dividing the analysis into many acquisitions so that the final
+	WDS spectrum is calculated as the average of many shorter-duration spectra.  Dividing the total time by the duration of the quantitave analysis
+	mentioned above, the number of acquisitions needed = 20,000 s / 600 s = 33ish acquisitions.</p>
+	
+	<p>So to summarize, here is the process to set up a WDS spectrum for trace element analysis:</p>
+	
+	<ol>
+		<li>First, determine an acceptable amount of time for the analysis.  It's a good idea to establish what your constraints are ahead of time!</li>
+		<li>Determine the spectrometer range that is required.  Maybe 15 mm?  This is the default +5/-5 mm offset, plus 50% extra.</li>
+		<li>Determine the required step size.  How many channels are required to see the peaks of interest?  Consider looking at some high-concentration
+		elements that are near the trace element peaks of interest to determine this.</li>
+		<li>Determine the count time that would be applicable for a quantitative analysis.  Do you expect that you will be counting for 10s on peak + 5s
+		on BG?  Or 300s on peak + 300s on BG?</li>
+		<li>Calculate the number of channels and the total Qual acquisition time using the long count time from the Quant analysis</li>
+		<li>Divide the Qual acquisition time by the quant acquisition time to determine the number of Qual acquisitions that will be needed to see the
+		peaks of interest.</li>
+		<li>Set up the spectrometers in the Qual analysis (Orange section) by adjusting the dwell time such that the calculated acquisition time matched
+		the acquisition time of the quantitative analysis.</li>
+		<li>Set up the analysis position condition in the Qual analysis (Yellow section) for multiple accumulations using the "..." button for the
+		calculated number of accumulations.  Use the same spot size as in the Quant analysis recipe.</li>
+		<li>Set the beam condition in the Qual analysis (green section) to match the quantitative analysis.</li>
+	</ol>
+	
+    </body>
+</html>
