@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Detector optimization</title>
+        <link rel="stylesheet" type = "text/css" href="../css/style.css">
+    </head>
+    
+	<!--
+		<li><a href = "">
+		SOP name</a></li>
+	-->
+	
+	<body>
+    
+	<h1>Detector optimization</h1>
+    
+	<p>Have you ever selected the "Default" setting under the "PHA settings" when you are setting up a recipe involving the WDS detectors and wondered
+	what these settings refer to?  If so, you're about to learn what those settings are all about.</p>
+	
+	<p>Our WDS detectors work on two basic principles: the first is Bragg diffraction, and the second is that of gaseous ionization detection.  This
+	second principle is what makes a Geiger counter work.  Geiger counters rely on the same kind of detector that our WD spectrometers use, which is
+	a tube of inert gas with a wire running through it.  The wire is has a high voltage (~1600 V) relative to the tube, and when when an ionizing particle
+	or X-ray passes through it, the gas becomes ionized in a process called a "Townsend avalanche" so that current can flow between the wire and the
+	tube.  This creates an electrical pulse that is converted to a "click" in the case of a Geiger counter and is converted into an X-ray count by
+	the microprobe.</p>
+	
+	<p>(This is where a schematic illustration of an X-ray detector should go.  Such an illustration can be found on p. 94 in "the Reed book")</p>
+	
+	<p>After an electrical signal is produced by the tube, the signal is read by a piece of hardware called the "pulse processor" which is responsible
+	for descriminating between X-ray counts that we care about (e.g. characteristic X-rays that your recipe is calibrated to turn into elemental
+	concentrations), X-ray counts that we don't care about (e.g. Ar escape peaks, higher order X-rays), and electrical noise (e.g. electrical interference
+	from the spectrometer motors).  It turns out that our X-ray detectors are sort of like little EDS detectors in the sense that the voltage of the
+	electrical signals produced by the detector are correlated with the type of signal or energy of incoming X-rays (in fact, SDDs like the one used
+	in our EDS detector have been used as a replacement for gas proportional counters on <a href = "https://doi.org/10.1093/micmic/ozad067.420">some
+	experimental microprobes</a>).  For this reason, these signals can be discriminated by setting a lower limit or optional upper limit to the voltages
+	accepted by the pulse processor.  A histogram of the voltage amplitude (?) or "pulse height" versus the number of pulses (analogous to an EDS spectrum)
+	is used in pulse-height analysis (PHA) to decide where to set upper and lower voltage limits.</p>
+	
+	<p>(This is where a schematic illustration of a pulse height distribution would go. Such an illustration can  be found on p. 96 in "the Reed book")</p>
+	
+	<p>Our X-ray detectors can be "tuned" for optimal performance by changing the following variables:</p>
+	
+	<ol>
+		<li><u>High voltage (HV)</u> -- this is the voltage between the wire and the tube.</li>
+		<li><u>Base level</u> -- this is the lower limit of the allowed voltage range.  This is usually set below main voltage peak but above the low
+		voltage noise level</li>
+		<li><u>Window</u> -- this is the optional upper voltage limit.  In principle, it could be used to exclude a higher-energy X-ray.</li>
+		<li><u>Detector mode</u> -- "Differential" and "integral" modes refer to whether or not the window parameter is used respectively (i.e. there
+		is no upper voltage limit when "integral" mode is used.</li>
+	</ol>
+	
+	<p>The goal of "tuning the detectors" is to maximize the count rate of desirable X-rays and minimize the count rate of undesirable X-rays or "counts"
+	that can be attributed to electrical noise.  Here is the basic process for "tuning" a detector for a particular X-ray:</p>
+	
+	<ol>
+		<li>Choose an element, X-ray, calibration standard, spectrometer, and accelerating voltage appropriate for the analysis for which you are optimizing
+		the detector.</li>
+		<li>Change the beam diameter to 10 microns -- this will limit damage to the standard as a lot of time will be spent with the beam focused on
+		one spot.</li>
+		<li>Move to the nominal peak position for the element, and set the beam current so that you are getting about 10,000 counts per second.</li>
+		<li>Perform a peak search and leave the spectrometer on the new peak position.</li>
+		<li>Open the "PHA" tab at the bottom of the "PC-EPMA" window.</li>
+		<li>Select the HV scan tab, and perform a high voltage scan.  Similar to a peak search, the software should now set the detector to the optimal
+		voltage that yielded the maximum number of counts.</li>
+		<li>Select the "Base level" tab, and click the start button to run a base level scan.</li>
+		<li>Adjust the base level and window values to exclude the noise peak and any other unwanted peaks (escape peak, higher order X-rays)</li>
+		<li>Note the HV, base level, window, and detector mode settings.  The only values saved by the software are whatever you save in your recipe
+		and the default values.</li>
+		<li>You're all done!  Don't forget to change the beam diameter back to "0 microns"</li>
+	</ol>
+	
+    </body>
+</html>
