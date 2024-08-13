@@ -8,11 +8,17 @@
 	<!--
 		<li><a href = "">
 		SOP name</a></li>
+		<figure>
+			<a href = "../images/CO geology/CO key features.jpg"><img src="../images/CO geology/CO key features thumb.jpg"></a>
+			<figcaption>Key features from USGS CO geologic map.</figcaption>
+		</figure>
 	-->
 	
 	<body>
     
 	<h1>Detector optimization</h1>
+	
+	<p><i>Rev. 8/13/2024 LRM</i></p>
     
 	<p>Have you ever selected the "Default" setting under the "PHA settings" when you are setting up a recipe involving the WDS detectors and wondered
 	what these settings refer to?  If so, you're about to learn what those settings are all about.</p>
@@ -24,8 +30,11 @@
 	tube.  This creates an electrical pulse that is converted to a "click" in the case of a Geiger counter and is converted into an X-ray count by
 	the microprobe.</p>
 	
-	<p>(This is where a schematic illustration of an X-ray detector should go.  Such an illustration can be found on p. 94 in "the Reed book")</p>
-	
+	<figure>
+			<a href = "../images/Reed detector schematic.png"><img src="../images/Reed detector schematic.png" width = 512></a>
+			<figcaption><b>Figure 1:</b> Schematic illustration of an X-ray detector tube, modified from "the Reed book" (p. 94 of my 2nd edition copy)</figcaption>
+	</figure>
+		
 	<p>After an electrical signal is produced by the tube, the signal is read by a piece of hardware called the "pulse processor" which is responsible
 	for descriminating between X-ray counts that we care about (e.g. characteristic X-rays that your recipe is calibrated to turn into elemental
 	concentrations), X-ray counts that we don't care about (e.g. Ar escape peaks, higher order X-rays), and electrical noise (e.g. electrical interference
@@ -36,7 +45,12 @@
 	accepted by the pulse processor.  A histogram of the voltage amplitude (?) or "pulse height" versus the number of pulses (analogous to an EDS spectrum)
 	is used in pulse-height analysis (PHA) to decide where to set upper and lower voltage limits.</p>
 	
-	<p>(This is where a schematic illustration of a pulse height distribution would go. Such an illustration can  be found on p. 96 in "the Reed book")</p>
+	<figure>
+			<a href = "../images/Reed PHA schematic.png"><img src="../images/Reed PHA schematic.png" width = 512></a>
+			<figcaption><b>Figure 2:</b> Schematic illustration of a pulse height distribution, from "the Reed book" (p. 96 of my 2nd edition copy).
+			a = base level.  a' = base level + window.  b = characteristic X-ray peak.  c = lower-energy escape peak or higher-order X-ray peak.  d = noise
+			peak.</figcaption>
+	</figure>
 	
 	<p>Our X-ray detectors can be "tuned" for optimal performance by changing the following variables:</p>
 	
