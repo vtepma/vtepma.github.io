@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Drift correction and prevention</title>
+        <link rel="stylesheet" type = "text/css" href="../css/style.css">
+    </head>
+    
+	<!--
+		<li><a href = "">
+		SOP name</a></li>
+		<figure>
+			<a href = "../images/CO geology/CO key features.jpg"><img src="../images/CO geology/CO key features thumb.jpg"></a>
+			<figcaption>Key features from USGS CO geologic map.</figcaption>
+		</figure>
+	-->
+	
+	<body>
+    
+	<h1>Drift correction and prevention</h1>
+    
+	<p><i>Rev. LRM 8/22/2024</i></p>
+	
+	<h3>Introduction</h3>
+	
+	<p>When you analyze the composition of a reference material on the microprobe, the difference between the reference composition and the measured
+	composition is called “error.”  Error is present in every analysis, and there are many sources of error – these can be categorized into two types:
+	random error and systematic error.  One type of systematic error is time-dependent “drift” which occurs when the state of the microprobe changes over
+	time.  Drift is mostly due to temperature changes, which cause the sample and spectrometer to change over time such that the alignment described by
+	the Bragg equation is no longer present.</p>
+
+	<h3>What can we do about drift?</h3>
+
+	<p>Microprobe users can minimize errors due to drift by applying one or both of these two strategies: 1) drift prevention using analytical
+	countermeasures, which change the way data are collected to minimize the impact of drift; or 2) drift correction by measuring replicates of a reference
+	composition and correcting the results for drift.</p>
+	
+	<h4>Option 1: drift-prevention countermeasures</h4>
+	
+	<p>JEOL’s “PC-EPMA” program has two software functions that can be used to periodically readjust the analysis recipe to accommodate instrument drift:
+	a) automatic peak searches and b) OM autofocusing.</p>
+	
+	<p>Automatic peak searches minimize spectrometer drift by periodically realigning the spectrometer to the X-ray(s) used for the analyses.  To enable
+	automatic peak searches:</p>
+	
+	<ol>
+		<li>Load the analysis recipe</li>
+		<li>Check the “Detail” box for the purple “Quantitative analysis condition” section</li>
+		<li>Change “Peak search of samples” to “Always” or “Every,” setting the frequency as appropriate.  For example, if “Every” is selected and set to 4,
+		peak searches will be performed on analysis numbers 1, 5, 9, 13…</li>
+		<li>Go to the “Detail” view of the orange “Analysis element condition” section</li>
+		<li>Set peak search from “0: Skip” to “1: Narrow” for each element as necessary.  For example, Si is usually the element most affected by drift
+		during analyses of Si minerals, and it is always present in the sample at high concentrations.  As such, this is a good element for automatic peak
+		searches while others might not be appropriate.</li>
+		<li>Save the recipe, and start acquiring data.</li>
+	</ol>
+
+	<p>OM autofocusing minimizes drift by automatically focusing the stage Z-height for individual samples before each analysis.  To enable OM autofocusing:</p>
+
+	<ol>
+		<li>Load the analysis recipe</li>
+		<li>Check the “Detail” box for the yellow “Analysis position condition” section</li>
+		<li>For each analysis, check the box for “OM Auto Focus.”  To enable this for many analyses at once, click the “Property” button on the right side
+		of the yellow section and follow the prompts.</li>
+		<li>Save the recipe, and start acquiring data.</li>
+		<li></li>
+	</ol>
+
+	<h4>Option 2: drift-correction</h4>
+	
+	<p>Alternatively, one can correct for drift by periodically analyzing replicates of a reference material and then calculating a time-dependent
+	correction factor for one or several elements and then using this time-dependent correction factor to correct analyses of unknown materials.
+	Additionally, we have an external data logger that can be used to monitor the room climate (temperature, pressure, relative humidity) to assist with
+	these calculations.</p>
+
+	<p>Here’s the process I would recommend:</p>
+
+	<ol>
+		<li>Note the date and time.</li>
+		<li>Start the green datalogger on the cart to the left of the column console:</li>
+		<ul>
+			<li>Check that there is an SD card in the datalogger</li>
+			<li>Press and hold the “Log” button until you hear a beep and see "datalogger" appear on the screen.</li>
+		</ul>
+		
+		<li>Prepare your quantitative analysis recipe and make sure to include analyses of a reference material (e.g. MAC Diopside) once every hour or so.</li>
+		<li>Collect data as normal.</li>
+		<li>When data collection is finished, stop the datalogger and retrieve the data:</li>
+		<ul>
+			<li>press and hold the “Log” button on the datalogger to stop recording</li>
+			<li>Remove the SD card and copy the data onto your computer</li>
+			<li>Replace the SD card in the logger</li>
+		</ul>
+		
+		<li>Talk to the lab manager about how to process the data, or you can do it yourself:</li>
+		<ul>
+			<li>Make a plot of major elements in the reference materials vs temperature (or pressure, or humidity).  Is there a correlation?</li>
+			<li>Re-plot the data for each major element as k = correct/measured, fit a line to this correlation.  Now you can calculate a correction
+			factor as a function of temperature (or pressure, or humidity).</li>
+			<li>Multiply this correction factor by your unknowns.  Did this “flatten out” any drift-related variation?  If so, pat yourself on the back,
+			and go drink a beer!</li>
+		</ul>
+	</ol>
+	
+	<p><b><u>Note:</u></b> Correcting for drift in this way (i.e. by correcting elemental/oxide concentrations directly) is not completely rigorous because
+	the corrected values will not have been re-corrected for matrix effects, and a more rigorous approach would be to drift correct the raw count rates (or
+	K-ratios, as is done in the "Probe for EPMA" program) and then apply the matrix effect correction to the drift-corrected signal.  While my proposed
+	method of drift correction does incur this additional source of inaccuracy, it is unlikely to be significant compared to other sources of error -- at
+	least in the case of a standard set of "major elements" analyzed for petrological purposes.  This may not be the case for trace and light element analyses
+	though.</p>
+	
+	<p><b><u>Note:</u></b> In theory, WDS quantitative analysis are superior to EDS analysis both in terms of precision and signl-to-noise ratios.  However, a
+	major drawback of WDS detectors compared to modern SDD-EDS detectors is their susceptability to drift due to changes in room climate.  For example,
+	rumor has it that even the heat generated by display monitors on the Control PC can influence count rates.  In the past, I believed that drift was
+	only significant on days when hot weather or afternoon thunderstorms overwhelmed the puny HVAC system at the NCFL.  However, it is becoming more
+	clear that drift can occur even on good days when the temperature stays between about 22 to 23 deg. C and temperature fluctions are within the 0.5
+	deg. C per hour facility specification stated by JEOL.  For example, I've found that only about a 0.5 deg. C change in temperature translates into
+	about a 1 wt% change in the measured SiO2 concentration in our MAC Diopside reference material.  This means that on a typical day, we could easily
+	have our room temperature stay within spec but have totals that go outside a desirable range of 99.0 to 101.0 wt%.</p>
+	
+    </body>
+</html>
