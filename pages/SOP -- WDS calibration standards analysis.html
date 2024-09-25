@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>WDS calibration</title>
+        <link rel="stylesheet" type = "text/css" href="../css/style.css">
+    </head>
+    
+	<!--
+		<li><a href = "">
+		SOP name</a></li>
+		<figure>
+			<a href = "../images/CO geology/CO key features.jpg"><img src="../images/CO geology/CO key features thumb.jpg"></a>
+			<figcaption>Key features from USGS CO geologic map.</figcaption>
+		</figure>
+	-->
+	
+	<body>
+    
+	<h1>WDS calibration standards analysis</h1>
+    
+	<p><i>Rev. 5/29/2023 LRM</i></p>
+	
+	<p><u>Note</u>: This SOP describes how to analyze reference materials to calibrate an existing WDS quantitative analysis recipe.  Creating the quant
+	analysis recipe first isn’t strictly necessary, but I think it’s a good idea for organizational/training purposes.</p>
+	
+	<p><u>Note</u>: Make sure that the spectrometer configuration (orange section) and accelerating voltage (green section) match the quant recipe that you’re
+	calibrating.  I’ve gotten this wrong more times than I should admit.</p>
+	
+	<p><b>To get started</b>, click the “Quick” button in the “PC-EPMA” program on the right side monitor, select the “Common recipe” button, and double click
+	the “New Standard Analysis” recipe on the list to the right.</p>
+	
+	<h3>Gray/Green menus: File path/beam conditions</h3>
+	
+	<ol>
+		<li>Set the “Path” field to the main folder on the E: drive where the data will be stored</li>
+		<li>Set the “Project Name” field according to the analyses being done (this creates a subfolder in the “Path” directory when data are generated)</li>
+		<li>Input/read the beam conditions (voltage/current).  Note that the checkboxes control whether the instrument will set the beam conditions
+		automatically or use the existing conditions.</li>
+	</ol>
+	
+	<h3>Purple section: Standard analysis condition</h3>
+	
+	<ol>
+		<li>Check “detail” box to view the detailed settings for this section</li>
+		<li>Click the “...” button to choose the standard, use “Move” button if using a stored position, and click “Ok”</li>
+		<li>Choose asynchronous mode</li>
+		<li>Check to confirm that these settings are used:
+			<ul>
+				<li>Peak search once every 10 points (so it will search once before the analysis of the first point)</li>
+				<li>Background “Always” (so it will look at the background every time)</li>
+				<li>Read probe current “Always” (so it will read the probe current before each analysis)</li>
+			</ul>
+	</ol>
+	
+	<h3>Yellow section: analysis position condition</h3>
+	
+	<ol>
+		<li>Check “detail” box</li>
+		<li>Move to a fresh location on the standard, focus on the sample surface using the OM image, and click the “Read position” button</li>
+		<li>If you’ll be navigating using the OM image, click the rectangle button to “pop out” the OM monitor window (this needs to be done
+		because of a software bug)</li>
+		<li>Click the “...” button to open the “Multiple accumulation” window</li>
+		<li>Move to a few more random locations and store them the “Add or change” button (usually I do four replicates total)</li>
+		<li>Set the beam scanning condition (e.g. circle with 5 micron diameter)</li>
+		<li>Click the “apply” button, and double check that everything looks correct</li>
+	</ol>
+	
+	<h3>Orange section: Analysis element condition</h3>
+	
+	<ol>
+		<li>Check the “detail” box</li>
+		<li>Click the periodic table button (“element” tab should be selected instead of the “search” tab)</li>
+		<li>Click the elements which will be calibrated with this standard.</li>
+		<li>For each element:
+			<ul>
+				<li>Default PHA settings</li>
+				<li>Peak search: #1 (may be necessary to use #2 for L- and M-lines, or other hard-to-locate trace element peaks)</li>
+				<li>Set the count time and background point spacing (e.g. 5mm means to use an L-value 5 mm below/above the peak position as background</li>
+			</ul>
+	</ol>
+	
+	<p><u>Note</u>: The analysis can be started by clicking the “Acquire” button, but since you will probably analyzing a bunch of standards, it usually
+	makes more sense to click “add to serial analysis” instead. To start the chain of queued serial analyses, go to the “Serial Analysis” tab at
+	the bottom of the EPMA software window, and click “Start”</p>
+	
+    </body>
+</html>

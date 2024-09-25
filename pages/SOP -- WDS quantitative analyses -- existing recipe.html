@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>WDS quant existing recipe</title>
+        <link rel="stylesheet" type = "text/css" href="../css/style.css">
+    </head>
+    
+	<!--
+		<li><a href = "">
+		SOP name</a></li>
+		<figure>
+			<a href = "../images/CO geology/CO key features.jpg"><img src="../images/CO geology/CO key features thumb.jpg"></a>
+			<figcaption>Key features from USGS CO geologic map.</figcaption>
+		</figure>
+	-->
+	
+	<body>
+    
+	<h1>WDS quantitative analyses (existing recipe)</h1>
+    
+	<p><i>Rev. 4/18/2024 LRM</i></p>
+
+	<p><u>Note</u>: This SOP describes how to use a pre-calibrated “recipe” which has been calibrated in advance.  For information about calibrating Quant
+	analyses, see the “Quant setup” SOP.</p>
+
+	<ol type = "1">
+		<li>Click on the “<b>Quick</b>” tab in the PC-EPMA window (right side monitor), and double click on the User Recipe corresponding to the type of
+		quantitative analysis you intend to do.</li>
+		<li>Update the folder name and directory.</li>
+		<li>In the yellow “sample locations” section for each sample location:
+			<br><br>
+			<u>Note</u>: It’s a good practice to add to the list of points for each acquisition rather than deleting the locations of previously-analyzed points.
+			You can simply uncheck points that you don’t want to analyze, and they will be omitted from the acquisition by the software.
+			<br><br>
+			<ol type = "a">
+				<li>Select the next row in the list, and enter a comment to identify the sample</li>
+				<li>Move to the correct location, and adjust the OM focus (stage Z-axis position)
+				<br><br>
+				<u>Note</u>: always end on a clockwise turn and press the “Jog” button
+				<br><br>
+				</li>
+				<li>Click the “<b>Read</b>” button to retrieve the sample location from the current stage coordinates</li>
+				<li>Set the correct beam conditions (e.g. a circular spot, 5 micron diameter)</li>
+				<li>Click the “<b>Apply</b>” button, and double check that the information was stored correctly in the table.</li>
+			</ol>
+		<br>
+		</li>
+		<li>When you’re ready to start the analyses, note the calculated duration, <b>Save the recipe</b>, and click the “<b>Acquire</b>” button</li>
+	</ol>
+
+	<h3>To retrieve the data:</h3>
+	
+	<ol type = "1">
+		<li>Click the “EPMA Data” tab at the bottom of the PC-EPMA window</li>
+		<li>Click the “Refresh” button to update the file list to include all new data</li>
+		<li>Click the folder containing your data. You should see one or several numbered files which each correspond to a single analytical result.</li>
+		<li>Click the “Summary” button near the folder icons.</li>
+		<li>In the menu that appears, click the “To Excel” button.  This will open the data in the Libre Calc spreadsheet program where data can be
+		viewed and manipulated.</li>
+	</ol>
+
+	<p><u>Note</u>: Because the stage reproducibility in our system is imperfect, it is sometimes desirable to do analyses one at a time.  This results in many
+	project folders which each contain a single analysis file.  To combine and export the data in this case, right click the parent directory and click
+	the option to combine similar files.  This will send all of the analyses into the same directory and renumber them so they can be easily exported as
+	a single table.</p>
+
+    </body>
+</html>

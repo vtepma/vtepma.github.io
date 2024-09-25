@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Quant analysis workflow</title>
+        <link rel="stylesheet" type = "text/css" href="../css/style.css">
+    </head>
+    
+	<!--
+		<li><a href = "">
+		SOP name</a></li>
+		<figure>
+			<a href = "../images/CO geology/CO key features.jpg"><img src="../images/CO geology/CO key features thumb.jpg"></a>
+			<figcaption>Key features from USGS CO geologic map.</figcaption>
+		</figure>
+	-->
+	
+	<body>
+    
+	<h1>Quant analysis workflow</h1>
+    
+	<p><i>Rev. 9/24/2024 LRM</i></p>
+	
+	<h3>Overview</h3>
+	
+	<p>This document summarizes the basic process for performing quant analyses on the microprobe as is often done by geologists.  This is the general process:</p>
+	
+	<ol>
+		<li>Make a plan</li>
+		<li>Create a quantitative analysis recipe</li>
+		<li>Analyze standards to generate calibration files</li>
+		<li>Validate your recipe</li>
+		<li>Put in points and analyze your samples</li>
+		<li>Quality control and postprocessing</li>
+	</ol>
+	
+	<h3>Make a plan</h3>
+	
+	<p>Before you do anything on the microprobe, it's a good idea to form a plan about how you want to perform your analyses.  This plan should include the
+	following information:</p>
+	
+	<ul>
+		<li>What are the questions that you hope to answer by collecting data on the microprobe?</li>
+		<li>What material will you be analyzing?</li>
+		<li>Which elements are you interested in, and roughly what concentrations are you expecting?</li>
+		<li>What spectrometer configuration do you plan to use (which spectrometer/which element/which crystal)</li>
+		<li>How long do you expect/need your analyses to take? (count times)</li>
+		<li>What beam conditions do you plan to use? (Accelerating voltage, beam current, spot size)</li>
+		<li>What reference materials do you plan to use to calibrate your recipe?</li>
+		<li>How do you plan to analyze your standards? (Same or different conditions from unknowns?)</li>
+		<li>What reference materials do you plan to use to validate your recipe?</li>
+		<li>What metrics do you plan to use for quality control?</li>
+	</ul>
+	
+	<p>Most of this information can be found by reviewing the literature to determine "what do other people do," but it is expected that few microprobe users
+	will be prepared with all of this information in advance, so please ask the lab manager for help when preparing this plan!</p>
+	
+	<h3>Creating a quantitative analysis recipe</h3>
+	
+	<p>In our lab, we use JEOL's "PC-EPMA" program for data acquisition.  This program uses a "recipe" template to store all of the settings, or "Conditions"
+	associated with the analyses that we do.  Setting up a recipe forces the user to finalize the plan so that it can be executed by the microprobe's
+	automation software.</p>
+	
+	<p>Here is the SOP document for creating a new quantitative analysis recipe: <a href = "SOP -- WDS quantitative analyses -- new recipe.html">SOP -- WDS
+	quantitative analyses -- new recipe</a></p>
+	
+	<h3>Analyze standards to generate calibration files</h3>
+	
+	<p>When you are setting up your quantitative analysis recipe, if you examine one of your elements in the orange "Analysis Element Condition" section,
+	you will see that the "Standard" field says "Cal-Std" by default.  This is where you specify which standard file is used to relate the X-ray count rate
+	obtained during the analysis to an elemental/oxide concentration.  The "Cal-Std" setting refers to a factory-calibrated, or "standardless", analysis mode
+	which can be used to perform analyses without doing any calibrations in advance -- this is a great tool for training users, testing out/debugging new
+	recipes, and the results are usually not too terrible (accurate to within a few wt%).  When we calibrate the microprobe, we analyze a reference material
+	with a known composition using a "Standard Analysis" recipe (as opposed to your "Quantitative Analysis" recipe).  This creates a standard analysis file
+	that will be used instead of the default factory calibration.</p>
+	
+	<p>Here is the SOP document for doing calibrations: <a href = "SOP -- WDS calibration standards analysis.html">SOP -- WDS calibration standards analysis
+	</a></p>
+	
+	<h3>Validate your recipe</h3>
+	
+	<p>Here is the SOP document for performing quantitative analyses using an existing recipe: <a href = "SOP -- WDS quantitative analyses -- existing recipe.html">SOP -- WDS quantitative analyses -- existing recipe</a></p>
+	
+	<p>At this point, you have a calibrated quantitative analysis recipe, and you <i>technically could</i> start putting in points and analyzing your samples.
+	However, before you do this, you should take some time to analyze one or a few reference materials for which you know the correct composition to make
+	sure that your recipe is giving you accurate results.  Also, this is when you will start to apply the <i>"metrics for quality control"</i> part of your
+	analysis plan.  For example, some users like to see analyses with totals between 98.5 to 101.0 wt%, and individual
+	element/oxide concentrations that are accurate to within 5 percent, relative.<p>
+	
+	<p>If you're not happy with the results, you probably made a mistake when running your standard analyses -- this happens all the time, and it is very easy
+	for user error to occur during the calibration step.  Try re-doing any of the affected calibrations to see if things improve.  If they don't, ask the lab
+	manager for assistance.</p>
+	
+	<p>If you are happy with the results, then you can go ahead and start analyzing your samples.</p>
+	
+	<h3>Put in points and analyze your samples</h3>
+	
+	<p>There isn't much to say about this step because how and where you analyze your sample depends on your unique research goals.  If you have any
+	questions about this, the lab manager can help you.  Otherwise, have fun putting in points!</p>
+	
+	<p>...but wait! -- what are you planning to do <a href = "Drift prevention and correction.html">about instrumental drift</a>?  A good way to check and
+	correct for instrumental drift is to periodically analyze one or a few reference materials to make sure that their measured compositions aren't changing
+	over time.  I recommend analyzing these about once every hour or two.  That means that, if your analyses take about three minutes to run, then every 20th
+	or 40th point in your acquisition sequence should be an analysis of a reference material.</P>
+	
+	<p>Ok, <i>now</i> you can have fun putting in your points.  Please don't hesitate to call or text the lab manager if you get stuck or have any questions.</p>
+	
+	<h3>Quality control and postprocessing</h3>
+	
+	<p>Did your data turn out ok?  Do you need to apply a drift correction?  Do you have questions about how to export your data?  The lab manager can help
+	you with these questions.</p>
+	
+	<p>In general, it is recommended that you use the "Summary" button to export your data to a comma-separated text file (spreadsheet) and then save this
+	spreadsheet in the folder corresponding to the acquisition that ran when you clicked "Acquire" or whatever the case may be.  For example, if the data
+	are all saved in the folder "QNT_0001" then you should save your spreadsheet in that folder.</p>
+	
+	<p>After you have exported your data, you can transfer the data from the microprobe using either our FileZilla server (from which it will be automatically
+	archived), or you can also use Google Remote Desktop to do this if you are using the microprobe remotely.<p>
+	
+    </body>
+</html>

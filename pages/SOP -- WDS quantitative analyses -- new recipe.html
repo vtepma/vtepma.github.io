@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>WDS quant new recipe</title>
+        <link rel="stylesheet" type = "text/css" href="../css/style.css">
+    </head>
+    
+	<!--
+		<li><a href = "">
+		SOP name</a></li>
+		<figure>
+			<a href = "../images/CO geology/CO key features.jpg"><img src="../images/CO geology/CO key features thumb.jpg"></a>
+			<figcaption>Key features from USGS CO geologic map.</figcaption>
+		</figure>
+	-->
+	
+	<body>
+    
+	<h1>WDS quantitative analyses (new recipe)</h1>
+    
+	<p><i>Rev. 4/18/2024 LRM</i></p>
+	
+	<p><u>Note:</u> this recipe describes how to set up an uncalibrated WDS quantitative analysis recipe.  If you want to make a calibrated recipe, do this
+	first and then refer to the “Calibration” recipe to apply a calibration to the existing recipe that you create here.<p>
+	
+	<h3>Before you start</h3>
+	
+	<p>Make a plan that includes the following pieces of information:</p>
+	
+	<ol>
+		<li>Which elements you want to analyze.</li>
+		<li>If you plan to eventually do a calibration, which standards you will use.</li>
+		<li>What reference materials you plan to use a “check samples” to make sure that your results are accurate.  Some people just analyze their
+		standards as unknowns, which is fine.</li>
+		<li>What spectrometer configuration you plan to use (the software can help you with this).</li>
+		<li>What beam power, count time, spot size you plan to use (the “X-ray measure” tool can help you with this).</li>
+	</ol>
+	
+	<p><b>To get started</b>, click the “Quick” button in the “PC-EPMA” program on the right side monitor, select the “Common recipe” button, and double click
+	the “New Quantitative Analysis” recipe on the list to the right.</p>
+	
+	<h3>Gray/Green menus: File path/beam conditions</h3>
+	
+	<ol>
+		<li>Set the “Path” field to the main folder on the E: drive where the data will be stored</li>
+		<li>Set the “Project Name” field according to the analyses being done (this creates a subfolder in the “Path” directory when data are generated)</li>
+		<li>Input/read the beam conditions (voltage/current).  Note that the checkboxes control whether the instrument will set the beam conditions automatically
+		or use the existing conditions.</li>
+	</ol>
+	
+	<h3>Purple section: Quantitative analysis condition</h3>
+	
+	<ol>
+		<li>Check “detail” box to open the detailed view of the settings</li>
+		<li>Check to confirm that these settings are used:
+			<ul>
+				<li>Analysis in asynchronous mode</li>
+				<li>Peak “none” – don’t do peak searches during the analyses unless you have a good reason to do so (e.g. to correct for temperature
+				fluctuations in the room).</li>
+				<li>Background “Always” (so the background will be analyzed every time)</li>
+				<li>Read probe current “Always” (so it will read the probe current before each analysis)</li>
+			</ul>
+		</li>
+	</ol>
+	
+	<h3>Orange section: Analysis element condition</h3>
+	
+	<ol>
+		<li>Check “detail” box to open the detailed view of the settings</li>
+		<li>Click the periodic table button (“element” tab should be selected instead of the “search” tab)</li>
+		<li>Click the elements which will be analyzed using this recipe.</li>
+		<li>For each element:
+			<ul>
+				<li>Default PHA settings</li>
+				<li>Peak search: #1 (only one narrow search should be necessary to find peaks.  The spectrometer reproducibility is very good.)</li>
+				<li>Set the count time and background point spacing (e.g. 5mm means to use an L-value 5 mm below/above the peak position as background)</li>
+			</ul>
+		</li>
+	</ol>
+	
+	<p>Note: example spectra stored in EPMA Data > JEOL Spectra can be used to check for interferences</p>
+	
+	<h3>When you’re all done</h3>
+	
+	<ol>
+		<li>Save the recipe using a descriptive name including the date, your name, and what the recipe will be used to analyze.</li>
+		<li><b>Yellow section: analysis position condition</b>:  Save this for last: add points and perform analyses according to the “existing recipe”
+		SOP now that you have created an extant recipe to use!</li>
+	</ol>
+	
+    </body>
+</html>
