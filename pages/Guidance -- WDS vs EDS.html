@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>WDS vs EDS</title>
+        <link rel="stylesheet" type = "text/css" href="../css/style.css">
+    </head>
+    
+	<!--
+		<li><a href = "">
+		SOP name</a></li>
+		<figure>
+			<a href = "../images/CO geology/CO key features.jpg"><img src="../images/CO geology/CO key features thumb.jpg"></a>
+			<figcaption>Key features from USGS CO geologic map.</figcaption>
+		</figure>
+		
+		<p><b>Q:</b> </p>
+		<p><b>A:</b> </p>
+		<br>
+	-->
+	
+	<body>
+    
+	<h1>WDS vs EDS</h1>
+	
+	<p><i>Rev. 12/03/2024 LRM</i></p>
+    
+	<p><b>Note:</b> WDS and EDS can both be used for quantitative analysis.  The methods are implemented in a few different ways on our microprobe,
+	and users must choose between them -- or at least make decisions about when/whether to use these methods for quantification.  WDS generally is
+	more accurate and precise, but requires more time, training, and effort.  EDS generally is faster and easier than WDS, but not quite as
+	accurate or precise.  As such, the choice of whether to use WDS or EDS can be fraimed as "is WDS worth the extra effort compared to EDS?"</p>
+	
+	<p><b>Note:</b> I make a few references below to larger numbers of analyses or transicts/grids working better for WDS than EDS.  This
+	is because the software for collecting EDS spectra (SEM Center) is intended for the manual placement of EDS analyses (i.e. clicking on
+	the field of view with the mouse pointer) while the software for collecting WDS data (PC-EPMA) is intended for locating points within the
+	context of the stage coordinate system.  PC-EPMA actually CAN be used to collect EDS data, but I tend to trust the DTSA-II program more
+	than JEOL's software because there is better documentation/community support for DTSA-II.  More testing in this area is needed.</p>
+	
+	<h3>FAQs</h3>
+	
+	<p><b>Q:</b> Can I get an analytical total with EDS?</p>
+	<p><b>A:</b> Yes, EDS quantification can be done using standards, just like WDS.  When a standards-based callibration is used, elemental
+	concentrations are determined independently, so they can be summed to obtain an analytical total.</p>
+	<br>
+	
+	<p><b>Q:</b> Can I do standardless analyses using WDS?</p>
+	<p><b>A:</b> Yes, the software on our microprobe includes a factory calibration for the WDS detectors, which is similar to that of the EDS
+	detector.  This is done by selecting "Cal-Std" in the "PC-EPMA" program.</p>
+	<br>
+	
+	<p><b>Q:</b> Can I use a combination of WDS and EDS in the same analysis?</p>
+	<p><b>A:</b> Yes, this can be done using the "PC-EPMA" program.</p>
+	<br>
+	
+	<p><b>Q:</b> How do I do standards-based analyses using the EDS system?</p>
+	<p><b>A:</b> Here are the options of which I am currently aware:</p>
+	<ul>
+		<li>Use the "PC-EPMA" program as you would for WDS.</li>
+		<li>Collect spectra using the "SEM Center" program, and then post-process the data using the NIST "DTSA-II" program.</li>
+		<li>I think there is a way to save/use standards within the "SEM Center"/"SmileView" program(s). (???)</li>
+	</ul>
+	<br>
+	
+	<hr>
+	
+	<h3>WDS summary</h3>
+	
+	<p><b>Advantages</b></p>
+	
+	<ul>
+		<li>Better accuracy</li>
+		<li>Lower detection limits</li>
+		<li>Simpler data reduction</li>
+		<li>Easier to explain</li>
+		<li>Better spectral resolution (less peak overlap)</li>
+	</ul>
+	
+	<p><b>Disadvantages</b></p>
+	
+	<ul>
+		<li>Calibration and validation take hours</li>
+		<li>More complicated software workflow</li>
+		<li>Many opportunities for user error</li>
+		<li>Poor temperature stability</li>
+		<li>Higher order X-ray artifacts</li>
+	</ul>
+	
+	<p><b>Recommended when...</b></p>
+	
+	<ul>
+		<li>required by the academic community</li>
+		<li>N > 100</li>
+		<li>Quantifying trace trace elements (< 1 wt%)</li>
+		<li>Elemental interferences are significant</li>
+		<li>User is a graduate student or faculty</li>
+	</ul>
+	
+	<p><b>Example use cases</b></p>
+	
+	<ul>
+		<li>Low-kV analyses (resolvable L-lines)</li>
+		<li>Thermobarometry involving trace elements (<1 wt%)</li>
+		<li>Monazite dating</li>
+		<li>Ti-in-Quartz analyses</li>
+		<li>Transects, grids, or other analyses for which the coordates need to be known or predetermined</li>
+	</ul>
+	
+	<hr>
+	
+	<h3>EDS summary</h3>
+	
+	<p><b>Advantages</b></p>
+	
+	<ul>
+		<li>Fast (higher throughput and instant results)</li>
+		<li>Simpler/easier for qualitative analysis</li>
+		<li>Easy to train people</li>
+		<li>Elemental selection is not strictly required in advance</li>
+	</ul>
+	
+	<p><b>Disadvantages</b></p>
+	
+	<ul>
+		<li>Harder to explain</li>
+		<li>Relies on complicated, sometimes undocumented software</li>
+		<li>Poorer spectral resolution (more peak overlap)</li>
+		<li>Sum peak artifacts</li>
+	</ul>
+	
+	<p><b>Recommended when...</b></p>
+	
+	<ul>
+		<li>N < 100</li>
+		<li>Thermobarometry uses major elements (>10 wt%)</li>
+		<li>Standardization for LA-ICP-MS</li>
+		<li>Analyses are not likely to turn out well (missing elements, not smooth and flat)</li>
+		<li>User is an undergraduate student or engineer</li>
+	</ul>
+	
+	<p><b>Example use cases</b></p>
+	
+	<ul>
+		<li>Exploratory/preliminary analyses of unknown samples</li>
+		<li>“Routine analyses of major elements”</li>
+		<li>Mineral identification</li>
+	</ul>
+	
+    </body>
+</html>
