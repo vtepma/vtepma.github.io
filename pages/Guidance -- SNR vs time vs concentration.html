@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>SNR vs Time vs Concentration</title>
+        <link rel="stylesheet" type = "text/css" href="../css/style.css">
+    </head>
+    
+	<!--
+		<li><a href = "">
+		SOP name</a></li>
+		<figure>
+			<a href = "../images/CO geology/CO key features.jpg"><img src="../images/CO geology/CO key features thumb.jpg"></a>
+			<figcaption>Key features from USGS CO geologic map.</figcaption>
+		</figure>
+	-->
+	
+	<body>
+    
+	<h1>SNR vs Time vs concentration</h1>
+    
+	<p>This guidance document is intended to help with the question of "will I be able to detect element X at a conventration
+	of Y ppm using the microprobe using analysis method Z (maps, quant analyses, spectra).  The recommendations here are based
+	on some tests I did on 250127, and more details can be found in my notes from that session.  My general approach to this
+	problem is to calculate the signal-to-noise ratio as SNR = [Net counts] / sqrt(BG counts).  When SNR > 3, we can say the
+	analyte is above the detection limit, and when SNR > 10, we can say that the analyte is above the quantification limit.
+	I use the detection limit at the threshold at which "we can see the peak, and the quantification limit as when "maps look
+	ok" and quantitative analyses "turn out well."</p>
+	
+	<p><b><u>Note:</u></b> We can calculate the change in SNR by increasing the beam current and/or acquisition time using a simple
+	power law where [SNR new] = [SNR old] * sqrt(R), where R = [new counts per analysis]/[old counts per analysis] keeping in
+	mind that the number of counts is proportional to the beam current and acquisition time.  So for example, if you increase
+	the beam current by a factor of 10 and cut the count time in half, then R = 10/2 = 5.</p>
+	
+	<p><b><u>Note:</u></b> Note: A lot of the analyses were done at 10 nA, so that can be thought of as the “default” beam condition for the
+	guiding remarks below.</p>
+	
+	<h3>Case 1: True major elements (>10 wt%)</h3>
+	<ul>
+		<li>Everything is easy, even at 10 nA.  Not really worth going into details.</li>
+		<li>Mapping is fine, even with a 10 ms dwell time.  Can probably see features even with a 10 nA beam, but increasing the
+		beam current is recommended.</li>
+	</ul>
+	
+	<h3>Case 2: 1s of wt%</h3>
+	<ul>
+		<li>EDS spectra should be at least 10s if not 30s at 10 nA.</li>
+		<li>For WDS spectra, the acquisition time needs to be at least 100 s, or it can be less with more beam current.</li>
+		<li>Quant analyses should be fine – even with 10s peak + 5s BG at 10 nA.</li>
+		<li>Maps should turn out ok if at least a 100 nA beam AND 50 ms dwell time are used.  At these conditions, a 256 x 256 pixel map will
+		take about an hour.  Background maps are recommended.  Small-area EDS mapping can be done by calculating "Net maps" with the
+		"SmileView" program.</li>
+	</ul>
+	
+	<h3>Case 3: 0.1s of wt% (1000s of ppm)</h3>
+	<ul>
+		<li>EDS spectra need to take at least 100 s at 10 nA, so a higher beam power is advisable.  Sum peaks are increasingly problematic.</li>
+		<li>WDS spectra will need to take about 5 minutes unless higher beam power is used.</li>
+		<li>Quant analyses will start getting close to the quantification limit at 10 s peak / 5 s bg.  Better increase the acquisition time
+		or acquisition time…</li>
+		<li>WDS Mapping may be possible using the equivalent of a 50 ms dwell time AND 300 nA beam.  Background mapes are required.</li>
+	</ul>
+	
+	<h3>Case 4: 0.01s of wt% (100s of ppm)</h3>
+	<ul>
+		<li>EDS spectra won’t work, and sum peaks become highly problematic.</li>
+		<li>WDS spectra will need to take 10s of minutes to around an hour and need at least 100 nA for clear results.</li>
+		<li>WDS quant analyses can be done in 5-10 minutes if a beam current of 100 nA is used.  Background curvature becomes significant,
+		so a 1-2 mm BG offset may be preferred.</li>
+		<li>We have never attempted anything like this before!  Based on the results below, a 64 x 64 pixel WDS map could be made using the
+		equivalent of a 21 second dwell time and a 100 nA beam, and it would only take 24 hours and it probably wouldn’t look pretty
+		(SNR = 6.5).  To double this SNR, something like a 400 nA beam or 4-day analytical session would be needed.  Background maps will
+		probably need to be done using another spectrometer and possibly applying a correction to account for differences in count rate
+		between spectrometers.</li>
+	</ul>
+		
+    </body>
+</html>
