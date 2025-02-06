@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Image segmentation</title>
+        <link rel="stylesheet" type = "text/css" href="../css/style.css">
+    </head>
+    
+	<!--
+		<li><a href = "">
+		SOP name</a></li>
+		<p><i><u>Pros:</u></i></p>
+	-->
+	
+	<body>
+    
+	<h1>Image analysis</h1>
+    
+	<p><i>Rev. 2/6/2025 LRM</i></p>
+	
+	<p>When you collect X-ray maps using the microprobe, it's easy to become overwhelmed by the amount of data that has been produced.  This is especially true when the EDS detector has been used in addition to the WDS detectors to analyze more than five elements.  This guidance document is intended to list a few strategies for "wading through" these maps to make sense of the tremendous amount of information contained within them.</p>
+	
+	<p>With this problem in mind, I consider two general tasks to be important: visualization and segmentation.  The goal of <b>visualization</b> is to present the data in a way that is "easy on the eyes" (and the brain) so that the viewer is able to intuitively make observations about features in the image.  <b>Segmentation</b> refers to the process of labeling individual pixels in an image, for example, to identify the abundance of different mineral phases in a rock sample or particle shapes/sizes in a powder sample.</p>
+	
+	<h2>Visualization Methods</h2>
+	
+	<h3>False color images</h3>
+	
+	<p>An X-ray map is an array of numbers with coordinates corresponding to their location relative to the sample and values corresponding to the number of counts (on in some cases, and elemental concentration).  When this map is displayed as a grayscale image on a computer screen, the software producing the image uses a table of color values to convert the numbers in the array into a specific color to be displayed on the screen.  We could say the software "looks up" the appropriate color in the table, and these lists of colors are commonly referred to as "lookup tables" (LUTs), and the resulting image is called a "false color" image.</p>
+	
+	<p>Instructions for creating false color images using ImageJ can be found in "Lowell's ImageJ notes".  I've reproduced them here in brief:</p>
+	
+	<ol>
+		<li>Open your TIFF-formatted image in ImageJ.  You can also start with an image that is not a TIFF, and convert it to a usable format with "Image > Type > 8-bit"</li>
+		<li>Click "Image > Lookup Tables > Fire"</li>
+	</ol>
+	
+	<h3>RGB images</h3>
+	
+	<p>Suppose you have lots of X-ray maps of the same area and you want to make a simple image that captures what is going on in multiple maps. The simplest way to do this is to make a composite image "RGB image" in which the contents of each map are assigned to the value of the red, green, and blue colors of the pixels on the screen.  Here are some basic steps to make an RGB image in ImageJ:</p>
+	
+	<ol>
+		<li>Open three TIFF-formatted X-ray maps in ImageJ.  You can also do this with images imported as "text images".</li>
+		<li>Optional: convert the images to 8-bit and/or adjust the brightness and contrast -- sometimes this helps ("Image > Type > 8-bit"; "Image > Adjust > Brightness/Contrast".</li>
+		<li>Convert the images into a stack with "Image > Stacks > Tools > Concatenate..." -- this will give you the option to ultimately choose the order of the images in the stack, which will be mapped to the red, green, and blue channels in that order.</li>
+		<li>Select "Image > Color > Stack to RGB..." to convert the stack into an RGB image.</li>
+	</ol>
+	
+	<h3>PCA images</h3>
+	
+	<p>RGB images have the advantage of being easy to create and easy to explain, but they have the disadvantage that they can only incorporate data from three images at once.  Images can be made to incorporate more information if principal component analysis (PCA) is used to calculate the three most significant principal components (PCs) and then assign them to the red, green, and blue color channels.  These "PCA images" contain much more information than RGB images, but they are more complicated to create and more difficult to interpret and explain to others.</p>
+	
+	<p>Here is a basic workflow for generating "PCA images":</p>
+	
+	<ol>
+		<li>Identify which images will be included/excluded from the calculation.</li>
+		<li>Format the data as needed and calculate principal components.  For me, I create a massive dataframe in R into which the pixel intensities of each map are collapsed as a single column.  Then, I use the "prcomp()" function in base R to calculate each PC.</li>
+		<li>Make other plots that might be used to help identify different loadings on each of the PCs.  Again, I do this using the "screeplot()" function and some other basic R operations like the "$" operator to access the PC result.  This step is documented fairly well in a number of freely-available R tutorials.</li>
+		<li>Make composite RGB images: I do this by converting the PC results back into a dataframe with the dimensions of the original image and then exporting/importing this data into ImageJ.  From that point, the composite image is created using the same method as for other "RGB images."</li>
+	</ol>
+	
+	<p>This approach is implemented in part using the code in this repository: <a href = "https://github.com/vtepma/PCA_images/">https://github.com/vtepma/PCA_images/</a>.  The code also segments the mapped area using K-means clustering -- more on that below.</p>
+	
+	<h2>Segmentation methods</h2>
+	
+	<h3>Manual thresholding</h3> 
+	
+	<p>The most basic way to segment an image is to assign segments using threshold values for a single image.  It turns out that modern backscattered electron (BSE) images are so sensitive that you can usually identify the minerals in your sample using BSE images alone.  Here's how to do that in ImageJ:</p>
+	
+	<ol>
+		<li>Open the image, ideally a TIFF.</li>
+		<li>Click "Image > Adjust > Threshold...</li>
+		<li>Use the sliding bars to adjust the minimum and maximum range to be accepted/rejected.  The pixels that are within/outside the range are shown in red, and the area percentage of the selected pixels is displayed in the menu above the sliders.</li>
+	</ol>
+	
+	<p>Using this method, you can manually measure the area percentage of different materials in the sample.  Note that something similar can be done on RGB images using "Image > Adjust > Color threshold..."</p>
+	
+	<h3>JEOL "one click" high speed cluster analysis (HSCA)</h3>
+	
+	<p>Our microprobe comes with software for performing hierarchical cluster analyses (HCA) on X-ray maps collected on the WDS detectors (note that EDS maps can't be used by this program).  HCA is done by calculating the Euclidean distance between each pair of pixel values in the image and then sorting the pixels into groups based on their distance from other pixels (e.g. pixels with a similar composition are close together; pixels with different compositions are far apart).  The software then assigns a "cutoff" value (or "height") at which groups of pixels are considered to fall into distinct clusters.</p>
+	
+	<p>Here is how to create a phase map using JEOL's HSCA program:</p>
+	
+	<ol>
+		<li>Collect a map using the WDS detectors (no, you can't use the EDS detector for this) to analyze each element that will be used by the segmentation model.  Note that not all elements present in the sample need to be analyzed -- just those that vary in a way that is useful for the segmentation process.  For example, if the Si concentration is the same in all of the phases or only present in tiny accessory phases, then you don't need to analyze it.</li>
+		<li>Open whole map acquisition file in the "NMap" program.</li>
+		<li>Click Analyze > HSCA (?; or something similar)</li>
+		<li>Examine the output and adjust the number of nodes as needed.  A good strategy is to "overfit" the model with more clusters than there really are, and then merge clusters together to arrive at the appropriate number.</li>
+		<li>Click File > export all (?; or something similar) to save the output</li>
+	</ol>
+	
+	<p>Note: I don't recommend this approach, partly because it requires the user be in the microprobe lab for extra time, and partly because the software doesn't work well for images larger than ~3E+5 pixels (the software may crash or run slowly).</p>
+	
+	<h3>JEOL's old cluster analysis software</h3>
+	
+	<p>Our microprobe has another older program that can be used to manually select clusters using a ternary plot created from three channels.  This can be figured out if the lab manager digs through his notes and searches hard through his own memory...</p>
+	
+	<h3>Other clustering methods</h3>
+	
+	<p>A brief internet search will show you that many methods are available out in the wild for segmenting images, and these rely on various supervised and unsupervised machine learning/classification algorithms.  One can DIY a solution without too much effort using Python, MatLab, R, etc., or use an existing software implementation of one of these clustering methods.  Here are a couple examples of the latter:</p>
+	
+	<ul>
+		<li>XMapTools: Pierre Lanari's MatLab-based program is intended to be used for creating quant maps, but creates phase maps using a "random forest" decision tree algorithm to segment the images as part of the quantification process.  More information can be found here: <a href = "https://xmaptools.ch/"></a>https://xmaptools.ch/</li>
+		<li>The "Probe Image" program in John Donovan's "Probe Software" suite can do this.  More information can be found here: <a href = "https://www.probesoftware.com/products/probe-image/">https://www.probesoftware.com/products/probe-image/</a></li>
+		<li>ImageJ/Fiji K-means clustering plugins: I've used an IJ plugin for segmentation before, and I'm sure others are available in the IJ/Fiji community.</li>
+	</ul>
+	
+    </body>
+</html>
